@@ -1,0 +1,20 @@
+#basic import
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+
+#load csv file with data
+dib = pd.read_csv('Diabetes Example Data.csv')
+
+# Converting categorical variables to numeric (Yes to 1 and No to 0)
+dib['Diabetes'] = dib['Diabetes'].map({'Yes': 1, 'No': 0})
+
+# Putting feature variable to X
+X = dib['Blood Sugar Level']
+
+# Putting response variable to y
+y = dib['Diabetes']
+
+#Genrating Generalized Linear Model Regression Results
+logm1 = sm.GLM(y,(sm.add_constant(X)), family = sm.families.Binomial())
+logm1.fit().summary()
